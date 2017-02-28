@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Video</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<video id="vid" width="640" controls>
+	<source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
+</video><br>
+<input type="button" id="pl" value="Play" onclick="ply()" style="background-color: #08C3F1;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;">
+<p>Total Time :
+<span id="tt">----</span>
+</p>
+<p >Time Passed :
+<span id="tp">----</span>
+</p>
+<p>Time Left :
+<span id="tl">----</span>
+</p>
+<script type="text/javascript">
+
+	var p=document.getElementById('vid');
+
+	function ply()
+	{
+		if(p.paused)
+		{
+		p.play();
+		$("#pl").attr('value','||');
+	    }
+	    else
+	    {
+	    p.pause();
+		$("#pl").attr('value','Play');	
+	    }
+
+	    totaltime();
+	    tmpsd();
+	    tmlft();
+	}
+
+	function timeconv(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay; 
+}
+
+	function totaltime()
+	{
+		var d=timeconv(document.getElementById('vid').duration);
+
+		document.getElementById('tt').innerHTML=d;
+	}
+
+	function tmpsd()
+	{
+		setTimeout(function(){
+			var pass=timeconv(document.getElementById('vid').currentTime);
+			document.getElementById('tp').innerHTML=pass;
+			tmpsd();
+		},1000)		
+	}
+
+	function tmlft()
+	{
+		setTimeout(function(){
+			var left=timeconv(vid.duration-vid.currentTime);
+			document.getElementById('tl').innerHTML=left;
+			tmlft();
+		},1000)
+	}
+</script>
+</body>
+</html>

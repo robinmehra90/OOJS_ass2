@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stop Watch</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 style="color: red;">StopWatch</h1>
+<h2 id="time" style="color: orange; ">00 : 00 : 00</h2><br><br><br><br>
+<input type="button" id="str" name="Start" value="Start" onclick="strt()" style=" background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px; ">
+<input type="button" name="Stop" value="Stop" onclick="stp()" style=" background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px; ">
+<input type="button" name="Time-Lapse" value="Time-Lapse" onclick="tl()" style=" background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px; ">
+<input type="button" name="Reset" value="Reset" onclick="rst()" style=" background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px; ">
+
+<ul id="laps">
+	<li> LAPS</li>
+</ul>
+
+<script type="text/javascript">
+	
+			var hr=0;
+			var min=0;
+			var sec=0;
+			var t;
+			var s;
+			
+		
+			//start function
+			function strt(){				
+			$("#str").attr('disabled',true);
+				sec=sec+1;
+				if(sec>59)
+				{
+					sec=0;
+					min=min+1;
+				}
+				if(min>59)
+				{
+					min=0;
+					hr+=1;
+				}
+				
+				var temp=checkTime(hr)+" : "+checkTime(min)+" : "+checkTime(sec);
+				document.getElementById('time').innerHTML=temp;
+
+				t=setTimeout(strt,1000);
+
+			}
+
+			function stp()
+			{
+				$("#str").attr('disabled', false);
+				clearInterval(t);
+			}
+
+			function tl()
+			{
+				
+				var temp="<li>"+checkTime(hr)+" : "+checkTime(min)+" : "+checkTime(sec)+"</li>";
+				$("#laps").append(temp);
+				
+			}
+
+			function rst()
+			{
+				hr=0;
+				min=0;
+				sec=0;
+				var temp=checkTime(hr)+" : "+checkTime(min)+" : "+checkTime(sec);
+				document.getElementById('time').innerHTML=temp;
+				stp();
+			}
+
+			function checkTime(i) {
+    if (i <=9) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+        }
+
+	
+	</script>
+</body>
+</html>

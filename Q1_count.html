@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Function call counter</title>
+	<script type="text/javascript">
+		(function(){
+			var inscount=0;
+			var directcount=0;
+			function count(obj){
+				if(this instanceof count)
+				{
+					inscount++;
+					console.log("instance count increased to "+inscount);
+				}
+				else
+				{
+					directcount++;
+					console.log("normal function call increased to "+directcount);
+				}
+			}
+			count();
+			new count();
+		})();
+	</script>
+</head>
+<body>
+
+</body>
+</html>

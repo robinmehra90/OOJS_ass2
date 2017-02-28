@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Object Copy</title>
+	<script type="text/javascript"></script>
+	<script type="text/javascript">
+	(function(){
+
+		function objcopy(obj){
+			var temp=JSON.parse(JSON.stringify(obj));
+			return temp;
+		}
+
+		var obj1={id:1};
+		var obj2=objcopy(obj1);
+		
+
+		console.log("Object 1 = ");
+		console.log(obj1);
+		console.log("Object 2 = ");
+		console.log(obj2);
+
+		obj1.id=5;
+		console.log("changed id of obj1 to 5")
+		console.log("Obj1 id : "+obj1.id);
+		console.log("obj2 id : "+obj2.id);
+	})();
+	</script>
+</head>
+<body>
+Open Console
+</body>
+</html>
